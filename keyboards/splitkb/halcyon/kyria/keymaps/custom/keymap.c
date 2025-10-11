@@ -14,35 +14,33 @@ enum layers {
     // _ADJUST,
 };
 
-
 // Aliases for readability
 // #define QWERTY   DF(_QWERTY)
-#define COLEMAK  DF(_COLEMAK_DH)
+#define COLEMAK DF(_COLEMAK_DH)
 // #define DVORAK   DF(_DVORAK)
 
-#define SYM_SPC  LT(_SYM, KC_SPC)
-#define MO_NAV   MO(_NAV)
-#define MO_NUM   MO(_NUM)
-#define OSL_FUN  OSL(_FUN)
+#define SYM_SPC LT(_SYM, KC_SPC)
+#define MO_NAV MO(_NAV)
+#define MO_NUM MO(_NUM)
+#define OSL_FUN OSL(_FUN)
 
-#define TG_NUM   TG(_NUM)
+#define TG_NUM TG(_NUM)
 
 // #define ADJUST   MO(_ADJUST)
 
-#define CTL_A  MT(MOD_LCTL, KC_A)
+#define CTL_A MT(MOD_LCTL, KC_A)
 #define GUI_R MT(MOD_LGUI, KC_R)
 #define SFT_S MT(MOD_LSFT, KC_S)
-#define ALT_T  MT(MOD_LALT, KC_T)
+#define ALT_T MT(MOD_LALT, KC_T)
 
-#define ALT_N  MT(MOD_RALT, KC_N)
+#define ALT_N MT(MOD_RALT, KC_N)
 #define SFT_E MT(MOD_RSFT, KC_E)
 #define GUI_I MT(MOD_RGUI, KC_I)
-#define CTL_O  MT(MOD_RCTL, KC_O)
+#define CTL_O MT(MOD_RCTL, KC_O)
 
-#define L_DESK  LCG(KC_LEFT)
-#define R_DESK  LCG(KC_RGHT)
-#define TSK_VIEW  LGUI(KC_TAB)
-
+#define L_DESK LCG(KC_LEFT)
+#define R_DESK LCG(KC_RGHT)
+#define TSK_VIEW LGUI(KC_TAB)
 
 // Note: LAlt/Enter (ALT_ENT) is not the same thing as the keyboard shortcut Alt+Enter.
 // The notation `mod/tap` denotes a key that activates the modifier `mod` when held down, and
