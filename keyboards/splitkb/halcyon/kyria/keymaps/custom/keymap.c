@@ -6,17 +6,19 @@
 enum layers {
     // _QWERTY = 0,
     // _DVORAK,
-    _COLEMAK_DH = 0,
+    // _COLEMAK_DH,
+    _BASE = 0,
     _SYM,
     _NAV,
     _NUM,
     _FUN,
     // _ADJUST,
+    _INV,
 };
 
 // Aliases for readability
 // #define QWERTY   DF(_QWERTY)
-#define COLEMAK DF(_COLEMAK_DH)
+// #define COLEMAK DF(_BASE)
 // #define DVORAK   DF(_DVORAK)
 
 #define SYM_SPC LT(_SYM, KC_SPC)
@@ -40,7 +42,7 @@ enum layers {
 
 #define L_DESK LCG(KC_LEFT)
 #define R_DESK LCG(KC_RGHT)
-#define TSK_VIEW LGUI(KC_TAB)
+#define INV_TSK LGUI(KC_TAB)
 
 // Note: LAlt/Enter (ALT_ENT) is not the same thing as the keyboard shortcut Alt+Enter.
 // The notation `mod/tap` denotes a key that activates the modifier `mod` when held down, and
@@ -59,18 +61,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * | LDesk  |   Z  |   X  |   C  |   D  |   V  |RMouse|   ↑  |  |   →  | TNum |   K  |   H  | ,  < | . >  | /  ? | RDesk  |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        |TkView| MNum | MSym/| Bksp |   ↓  |  |   ←  | Enter| MSym/| MNav |LMouse|
- *                        |      |      | Space|      |      |  |      |      | Space|      |      |
+ *                        | MInv/| MNum | MSym/| Bksp |   ↓  |  |   ←  | Enter| MSym/| MNav |LMouse|
+ *                        |TkView|      | Space|      |      |  |      |      | Space|      |      |
  *                        `----------------------------------'  `----------------------------------'
  * ,-----------------------------------.                                              ,-----------------------------------.
  * | MUTE | ____ | _____ | ____ | ____ |                                              | MUTE | ____ | _____ | ____ | ____ |
  * `-----------------------------------'                                              `-----------------------------------'
  */
-    [_COLEMAK_DH] = LAYOUT_split_3x6_5_hlc(
+    [_BASE] = LAYOUT_split_3x6_5_hlc(
      KC_TAB  , KC_Q ,  KC_W   ,  KC_F  ,   KC_P ,   KC_B ,                                        KC_J,   KC_L ,  KC_U ,   KC_Y ,KC_SCLN, KC_BSLS,
      KC_ESC  , CTL_A,  GUI_R  ,  SFT_S ,   ALT_T,   KC_G ,                                        KC_M,   ALT_N,  SFT_E,   GUI_I,  CTL_O, CTL_QUOT,
      L_DESK  , KC_Z ,  KC_X   ,  KC_C  ,   KC_D ,   KC_V , MS_BTN2, KC_UP ,     KC_RGHT, TG_NUM , KC_K,   KC_H ,KC_COMM, KC_DOT ,KC_SLSH, R_DESK,
-                               TSK_VIEW, MO_NUM , SYM_SPC, KC_BSPC,KC_DOWN,     KC_LEFT, KC_ENT, SYM_SPC, MO_NAV, MS_BTN1,
+                                INV_TSK, MO_NUM , SYM_SPC, KC_BSPC,KC_DOWN,     KC_LEFT, KC_ENT, SYM_SPC, MO_NAV, MS_BTN1,
      KC_MUTE, KC_NO,  KC_NO, KC_NO, KC_NO,                                                                KC_MUTE, KC_NO, KC_NO, KC_NO, KC_NO
     ),
 
@@ -174,6 +176,33 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      _______, _______,  _______, _______, _______,                                                       _______, _______, _______, _______, _______
     ),
 
+/*
+ * Inverse Layer: Invert left-right
+ *
+ * ,-------------------------------------------.                              ,-------------------------------------------.
+ * |  Tab   |   Q  |   W  |   F  |   P  |   B  |                              |   J  |   L  |   U  |   Y  | ;  : |  \ |   |
+ * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
+ * |  Esc   |Ctrl/A| GUI/R|Shft/S| Alt/T|   G  |                              |   M  | Alt/N|Shft/E| GUI/I|Ctrl/O|  ' "   |
+ * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
+ * | LDesk  |   Z  |   X  |   C  |   D  |   V  |RMouse|   ↑  |  |   →  | TNum |   K  |   H  | ,  < | . >  | /  ? | RDesk  |
+ * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
+ *                        | MInv/| MNum | MSym/| Bksp |   ↓  |  |   ←  | Enter| MSym/| MNav |LMouse|
+ *                        |TkView|      | Space|      |      |  |      |      | Space|      |      |
+ *                        `----------------------------------'  `----------------------------------'
+ * ,-----------------------------------.                                              ,-----------------------------------.
+ * | MUTE | ____ | _____ | ____ | ____ |                                              | MUTE | ____ | _____ | ____ | ____ |
+ * `-----------------------------------'                                              `-----------------------------------'
+ */
+    [_BASE] = LAYOUT_split_3x6_5_hlc(
+     KC_TAB  , KC_Q ,  KC_W   ,  KC_F  ,   KC_P ,   KC_B ,                                        KC_J,   KC_L ,  KC_U ,   KC_Y ,KC_SCLN, KC_BSLS,
+     KC_ESC  , CTL_A,  GUI_R  ,  SFT_S ,   ALT_T,   KC_G ,                                        KC_M,   ALT_N,  SFT_E,   GUI_I,  CTL_O, CTL_QUOT,
+     L_DESK  , KC_Z ,  KC_X   ,  KC_C  ,   KC_D ,   KC_V , MS_BTN2, KC_UP ,     KC_RGHT, TG_NUM , KC_K,   KC_H ,KC_COMM, KC_DOT ,KC_SLSH, R_DESK,
+                                INV_TSK, MO_NUM , SYM_SPC, KC_BSPC,KC_DOWN,     KC_LEFT, KC_ENT, SYM_SPC, MO_NAV, MS_BTN1,
+     KC_MUTE, KC_NO,  KC_NO, KC_NO, KC_NO,                                                                KC_MUTE, KC_NO, KC_NO, KC_NO, KC_NO
+    ),
+
+
+
 // /*
 //  * Halcyon Layer template
 //  *
@@ -203,7 +232,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 #if defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
-    [_COLEMAK_DH] = { ENCODER_CCW_CW(MS_WHLL, MS_WHLR),  ENCODER_CCW_CW(MS_WHLL, MS_WHLR),  ENCODER_CCW_CW(MS_WHLU, MS_WHLD),  ENCODER_CCW_CW(MS_WHLU, MS_WHLD)  },
+    [_BASE] = { ENCODER_CCW_CW(MS_WHLL, MS_WHLR),  ENCODER_CCW_CW(MS_WHLL, MS_WHLR),  ENCODER_CCW_CW(MS_WHLU, MS_WHLD),  ENCODER_CCW_CW(MS_WHLU, MS_WHLD)  },
     [_SYM] = { ENCODER_CCW_CW(_______, _______),  ENCODER_CCW_CW(_______, _______),  ENCODER_CCW_CW(_______, _______),  ENCODER_CCW_CW(_______, _______)  },
     [_NAV] = { ENCODER_CCW_CW(KC_VOLU, KC_VOLD),  ENCODER_CCW_CW(KC_VOLU, KC_VOLD),  ENCODER_CCW_CW(KC_VOLU, KC_VOLD),  ENCODER_CCW_CW(KC_VOLU, KC_VOLD)  },
     [_NUM] = { ENCODER_CCW_CW(_______, _______),  ENCODER_CCW_CW(_______, _______),  ENCODER_CCW_CW(_______, _______),  ENCODER_CCW_CW(_______, _______)  },
